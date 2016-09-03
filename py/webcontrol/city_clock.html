@@ -5,11 +5,11 @@
 <title>pcmola Digital Clock with jQuery</title>
 <style type="text/css">
 body{
-	 background:#202020;
-	 font:bold 12px Arial, Helvetica, sans-serif;
-	 margin:0;
-	 padding:0;
-	 color:#bbbbbb; 
+     background:#202020;
+     font:bold 12px Arial, Helvetica, sans-serif;
+     margin:0;
+     padding:0;
+     color:#bbbbbb; 
 }
 
 
@@ -71,7 +71,7 @@ ul li {  display:inline; font-size:8em; font-family:'DSDIGI', Arial, Helvetica, 
 {
 0% {opacity:1.0; color:#00ff00;}
 50% {opacity:0; text-shadow:none; }
-100% {opacity:1.0; color:#00ff00; }	
+100% {opacity:1.0; color:#00ff00; } 
 }
 
 
@@ -96,70 +96,70 @@ $(document).ready(function() {
 
     //도시별, 시간의 10의 자리 세팅(1~12 표시 기준)
     setInterval( function() {
-    	var hours = new Date().getHours();
-    	$("#seoul_hours1").html(calcHours1(hours));
-    	
-    	var newyork_hours = resetHours(hours, OFFSET_NEWYORK);
-    	$("#newyork_hours1").html(calcHours1(newyork_hours));
-    	
-    	var beijing_hours = resetHours(hours, OFFSET_BEIJING);
-    	$("#beijing_hours1").html(calcHours1(beijing_hours));
-    	
-    	var london_hours = resetHours(hours, OFFSET_LONDON);
-    	$("#london_hours1").html(calcHours1(london_hours));
-    	
-    	var paris_hours = resetHours(hours, OFFSET_PARIS);
-    	$("#paris_hours1").html(calcHours1(paris_hours));
-    	
-    	var sydney_hours = resetHours(hours, OFFSET_SYDNEY);
-    	$("#sydney_hours1").html(calcHours1(sydney_hours));
-    	
+        var hours = new Date().getHours();
+        $("#seoul_hours1").html(calcHours1(hours));
+        
+        var newyork_hours = resetHours(hours, OFFSET_NEWYORK);
+        $("#newyork_hours1").html(calcHours1(newyork_hours));
+        
+        var beijing_hours = resetHours(hours, OFFSET_BEIJING);
+        $("#beijing_hours1").html(calcHours1(beijing_hours));
+        
+        var london_hours = resetHours(hours, OFFSET_LONDON);
+        $("#london_hours1").html(calcHours1(london_hours));
+        
+        var paris_hours = resetHours(hours, OFFSET_PARIS);
+        $("#paris_hours1").html(calcHours1(paris_hours));
+        
+        var sydney_hours = resetHours(hours, OFFSET_SYDNEY);
+        $("#sydney_hours1").html(calcHours1(sydney_hours));
+        
     }, 1000);
 
 
     //도시별 시간의 1의 자리 세팅(1~12 표시 기준)
     setInterval( function() {
-    	var hours = new Date().getHours();
-    	$("#seoul_hours2").html(calcHour2(hours));
-        	
+        var hours = new Date().getHours();
+        $("#seoul_hours2").html(calcHour2(hours));
+            
         var newyork_hours = resetHours(hours, OFFSET_NEWYORK);
-       	$("#newyork_hours2").html(calcHour2(newyork_hours));
-       	
-       	var beijing_hours = resetHours(hours, OFFSET_BEIJING);
-       	$("#beijing_hours2").html(calcHour2(beijing_hours));
-       	
-       	var london_hours = resetHours(hours, OFFSET_LONDON);
-       	$("#london_hours2").html(calcHour2(london_hours));
-       	
-       	var paris_hours = resetHours(hours, OFFSET_PARIS);
-       	$("#paris_hours2").html(calcHour2(paris_hours));
-       	       	
-       	var sydney_hours = resetHours(hours, OFFSET_SYDNEY);
-       	$("#sydney_hours2").html(calcHour2(sydney_hours));
+        $("#newyork_hours2").html(calcHour2(newyork_hours));
+        
+        var beijing_hours = resetHours(hours, OFFSET_BEIJING);
+        $("#beijing_hours2").html(calcHour2(beijing_hours));
+        
+        var london_hours = resetHours(hours, OFFSET_LONDON);
+        $("#london_hours2").html(calcHour2(london_hours));
+        
+        var paris_hours = resetHours(hours, OFFSET_PARIS);
+        $("#paris_hours2").html(calcHour2(paris_hours));
+                
+        var sydney_hours = resetHours(hours, OFFSET_SYDNEY);
+        $("#sydney_hours2").html(calcHour2(sydney_hours));
     }, 1000);
-    	
+        
     //도시별 분의 10의 자리 세팅
     setInterval( function() {
-    	var minutes = new Date().getMinutes();
-    	$("#seoul_min1").html(Math.floor(minutes/10, 1));
-    	$("#newyork_min1").html(Math.floor(minutes/10, 1));
-    	$("#beijing_min1").html(Math.floor(minutes/10, 1));
-    	$("#london_min1").html(Math.floor(minutes/10, 1));
-    	$("#paris_min1").html(Math.floor(minutes/10, 1));
-    	$("#sydney_min1").html(Math.floor(minutes/10, 1));
+        var minutes = new Date().getMinutes();
+        $("#seoul_min1").html(Math.floor(minutes/10, 1));
+        $("#newyork_min1").html(Math.floor(minutes/10, 1));
+        $("#beijing_min1").html(Math.floor(minutes/10, 1));
+        $("#london_min1").html(Math.floor(minutes/10, 1));
+        $("#paris_min1").html(Math.floor(minutes/10, 1));
+        $("#sydney_min1").html(Math.floor(minutes/10, 1));
     },1000);
-    	
+        
     //도시별 분의 1의 자리 세팅
     setInterval( function() {
-    	var minutes = new Date().getMinutes();
-    	$("#seoul_min2").html(minutes-(Math.floor(minutes/10)*10));
-    	$("#newyork_min2").html(minutes-(Math.floor(minutes/10)*10));
-    	$("#beijing_min2").html(minutes-(Math.floor(minutes/10)*10));
-    	$("#london_min2").html(minutes-(Math.floor(minutes/10)*10));
-    	$("#paris_min2").html(minutes-(Math.floor(minutes/10)*10));
-    	$("#sydney_min2").html(minutes-(Math.floor(minutes/10)*10)); 
+        var minutes = new Date().getMinutes();
+        $("#seoul_min2").html(minutes-(Math.floor(minutes/10)*10));
+        $("#newyork_min2").html(minutes-(Math.floor(minutes/10)*10));
+        $("#beijing_min2").html(minutes-(Math.floor(minutes/10)*10));
+        $("#london_min2").html(minutes-(Math.floor(minutes/10)*10));
+        $("#paris_min2").html(minutes-(Math.floor(minutes/10)*10));
+        $("#sydney_min2").html(minutes-(Math.floor(minutes/10)*10)); 
         
-    },1000);        		
+    },1000);                
 
 }); 
 
@@ -215,8 +215,8 @@ function resetHours(hours, offset) {
         <td id="seoul_bg1" width="50%">
             <ul>
                 <li id="seoul_city"></li>
-            	<li id="seoul_hours1"> </li>
-            	<li id="seoul_hours2"> </li>
+                <li id="seoul_hours1"> </li>
+                <li id="seoul_hours2"> </li>
                 <li id="point">:</li>
                 <li id="seoul_min1"> </li>
                 <li id="seoul_min2"> </li>
@@ -225,8 +225,8 @@ function resetHours(hours, offset) {
         <td id="newyork_bg1" width="50%">
             <ul>
                 <li id="newyork_city"></li>
-            	<li id="newyork_hours1"> </li>
-            	<li id="newyork_hours2"> </li>
+                <li id="newyork_hours1"> </li>
+                <li id="newyork_hours2"> </li>
                 <li id="point">:</li>
                 <li id="newyork_min1"> </li>
                 <li id="newyork_min2"> </li>
@@ -237,8 +237,8 @@ function resetHours(hours, offset) {
         <td id="beijing_bg1">
             <ul>
                 <li id="beijing_city"></li>
-            	<li id="beijing_hours1"> </li>
-            	<li id="beijing_hours2"> </li>
+                <li id="beijing_hours1"> </li>
+                <li id="beijing_hours2"> </li>
                 <li id="point">:</li>
                 <li id="beijing_min1"> </li>
                 <li id="beijing_min2"> </li>
@@ -247,8 +247,8 @@ function resetHours(hours, offset) {
         <td id="london_bg1">
             <ul>
                 <li id="london_city"></li>
-            	<li id="london_hours1"> </li>
-            	<li id="london_hours2"> </li>
+                <li id="london_hours1"> </li>
+                <li id="london_hours2"> </li>
                 <li id="point">:</li>
                 <li id="london_min1"> </li>
                 <li id="london_min2"> </li>
@@ -259,8 +259,8 @@ function resetHours(hours, offset) {
         <td id="paris_bg1">
             <ul>
                 <li id="paris_city"></li>
-            	<li id="paris_hours1"> </li>
-            	<li id="paris_hours2"> </li>
+                <li id="paris_hours1"> </li>
+                <li id="paris_hours2"> </li>
                 <li id="point">:</li>
                 <li id="paris_min1"> </li>
                 <li id="paris_min2"> </li>
@@ -269,8 +269,8 @@ function resetHours(hours, offset) {
         <td id="sydney_bg1">
             <ul>
                 <li id="sydney_city">London </li>
-            	<li id="sydney_hours1"> </li>
-            	<li id="sydney_hours2"> </li>
+                <li id="sydney_hours1"> </li>
+                <li id="sydney_hours2"> </li>
                 <li id="point">:</li>
                 <li id="sydney_min1"> </li>
                 <li id="sydney_min2"> </li>
