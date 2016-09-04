@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>1 Button - 2 Outputs</title>
+        <script type="text/javascript" src="/webiopi.js"></script>
+        <script type="text/javascript">
+            webiopi().ready(function() {
+                webiopi().setFunction(18,"out");
+                webiopi().setFunction(25,"out");
+
+                
+                var content, button;
+                content = $("#content");
+
+                button = webiopi().createGPIOButton(18, "right f");
+                content.append(button);
+
+                button = webiopi().createGPIOButton(25, "left f");
+                content.append(button);
+
+                button = webiopi().createButton("hold", "Hold", mousedown, mouseup);
+                content.append(button);
+            });
+
+            
+            function mousedown() {
+                webiopi().digitalWrite(18, 1);
+                webiopi().digitalWrite(25, 1);
+            }
+
+            function mouseup() {
+                webiopi().digitalWrite(18, 0);
+                webiopi().digitalWrite(25, 0);
+            }
+        </script>
+        <style type="text/css">
+            button {
+                display: block;
+                margin: 5px 5px 5px 5px;
+                width: 200px;
+                height: 45px;
+                font-size: 18pt;
+                font-weight: bold;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div align="center">
+            <div id="content"></div>
+        </div>
+    </body>
+</html>
