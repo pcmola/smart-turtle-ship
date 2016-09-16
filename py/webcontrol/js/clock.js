@@ -196,11 +196,11 @@ function resetHours(hours, offset) {
 
 function activateCity(city) {
     $("#"+city+"_city").css({"color": "#202020"});
-    $("#"+city+"_bg").css({"background": "#cccccc"});
-    $("#"+city+"_hours1").css({"color": "#00ff00"});
-    $("#"+city+"_hours2").css({"color": "#0000ff"});
-    $("#"+city+"_min1").css({"color": "#ff0000"});
-    $("#"+city+"_min2").css({"color": "#ffff00"});
+    $("#"+city+"_bg").css({"background": "#BBBBBB"});
+    $("#"+city+"_hours1").css({"color": "#008F2E"});
+    $("#"+city+"_hours2").css({"color": "#2060B4"});
+    $("#"+city+"_min1").css({"color": "#C10000"});
+    $("#"+city+"_min2").css({"color": "#FFD90A"});
 }
 
 function unactivateCity(city) {
