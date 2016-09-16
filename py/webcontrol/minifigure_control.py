@@ -34,13 +34,13 @@ def loop():
 
 def destroy():
     webiopi.debug("Script with macros - Destroy")
-    GPIO.output(jong_pwm_pin, GPIO.LOW)
+    GPIO.pulseRatio(jong_pwm_pin, 0);
     GPIO.output(jong_dir_pin, GPIO.LOW)    
     
-    GPIO.output(book_pwm_pin, GPIO.LOW)
+    GPIO.pulseRatio(book_pwm_pin, 0);
     GPIO.output(book_dir_pin, GPIO.LOW) 
     
-    GPIO.output(jing_pwm_pin, GPIO.LOW)
+    GPIO.pulseRatio(jing_pwm_pin, 0)
     GPIO.output(jing_dir_pin, GPIO.LOW)
 
 
