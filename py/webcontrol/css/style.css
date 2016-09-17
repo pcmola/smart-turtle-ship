@@ -29,7 +29,12 @@ ul li {  display:inline; font-size:8em; font-family:'DSDIGI', Arial, Helvetica, 
 #paris_city     { font-size:4em; }
 #sydney_city     { font-size:4em; }
 
-#point { position:relative; -webkit-animation:mymove 2s ease infinite; padding-left:10px; padding-right:10px; }
+#point { 
+    position:relative; 
+    -webkit-animation:mymove 2s ease infinite;
+    animation:mymove 2s ease infinite;
+    padding-left:10px; 
+    padding-right:10px; }
 
 @-webkit-keyframes mymove 
 {
@@ -37,6 +42,14 @@ ul li {  display:inline; font-size:8em; font-family:'DSDIGI', Arial, Helvetica, 
 50% {opacity:0; text-shadow:none; }
 100% {opacity:1.0; text-shadow:0 0 10px; color:#00ff00; }   
 }
+
+@keyframes mymove 
+{
+0% {opacity:1.0; text-shadow:0 0 10px; color:#00ff00;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 10px; color:#00ff00; }   
+}
+
 
     button {
         display:inline;
