@@ -25,10 +25,12 @@ webiopi().ready(function() {
 
     button = webiopi().createMacroButton("jing", "", "jing_strike");
     content.append(button);
-
+   
+   customizeForDevice();
 });
 
 $(document).ready(function() {
+    
     //시차 설정(서울 기준)
     var OFFSET_NEWYORK = -13;
     var OFFSET_BEIJING =  -1;
@@ -149,6 +151,8 @@ $(document).ready(function() {
         
     },1000);                
 
+    
+   
 }); 
 
 
@@ -226,3 +230,21 @@ function webiopiControl(var1, var2, var3) {
     webiopi().digitalWrite(GPIO_ARRAY[1], var2);
     webiopi().digitalWrite(GPIO_ARRAY[2], var3); 
 }
+
+var customizeForDevice = function(){        
+    var ua = navigator.userAgent;            
+    //alert(ua); 
+    var checker = {                          
+      iphone: ua.match(/iPhone/)
+    };                                       
+    if (checker.iphone){     
+        $("li").css({"font-size":"6em"}); 
+        $("#seoul_city  ").css({"font-size":"4.5em"});
+        $("#newyork_city").css({"font-size":"4.5em"});
+        $("#beijing_city").css({"font-size":"4.5em"});
+        $("#london_city ").css({"font-size":"4.5em"});
+        $("#paris_city  ").css({"font-size":"4.5em"});
+        $("#sydney_city ").css({"font-size":"4.5em"}); 
+        $("button").css({"margin":"8px 25px 8px 25px", "width":"149px", "height":"132px"}); 
+    }     
+}                                   
