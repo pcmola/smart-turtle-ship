@@ -18,16 +18,15 @@ body{
 
 }
 
-
 ul { margin:0px 20px 0px 0px; padding:0px; list-style:none; text-align:right;}
-ul li {  display:inline; font-size:8em; font-family:'DSDIGI', Arial, Helvetica, sans-serif; }
+ul li {  display:inline; font-size:9em; font-family:'DSDIGI', Arial, Helvetica, sans-serif; }
 
-#seoul_city     { font-size:4em; }
-#newyork_city   { font-size:4em; }
-#beijing_city   { font-size:4em; }
-#london_city    { font-size:4em; }
-#paris_city     { font-size:4em; }
-#sydney_city     { font-size:4em; }
+#seoul_city     { font-size:5em; }
+#newyork_city   { font-size:5em; }
+#beijing_city   { font-size:5em; }
+#london_city    { font-size:5em; }
+#paris_city     { font-size:5em; }
+#sydney_city    { font-size:5em; }
 
 #point { 
     position:relative; 
@@ -50,31 +49,79 @@ ul li {  display:inline; font-size:8em; font-family:'DSDIGI', Arial, Helvetica, 
 100% {opacity:1.0; text-shadow:0 0 10px; color:#00ff00; }   
 }
 
+button {
+    display:inline;
+    margin: 50px 30px 5px 30px;
+    width: 290px;
+    height:255px;
+    font-size: 40pt;
+    font-weight: bold;
+    color: black;
+    border-radius: 20px;
+    
+}
+button#jong {
+    background-image: url("/images/jong.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+button#book {
+    background-image: url("/images/book.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+button#jing {
+    background-image: url("/images/jing.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}    
 
-    button {
-        display:inline;
-        margin: 50px 30px 5px 30px;
-        width: 243px;
+/*ipad 공용*/
+@media only screen and (max-width: 1100px) {
+    button { 
+        margin: 50px 25px 30px 25px;
+        width: 243px; 
         height:211px;
-        font-size: 40pt;
-        font-weight: bold;
-        color: black;
-        border-radius: 20px;
-        
     }
-    button#jong {
-        background-image: url("/images/jong.png");
-        background-size: 100%;
-        background-repeat: no-repeat;
+    #seoul_city     { font-size:4em; }
+    #newyork_city   { font-size:4em; }
+    #beijing_city   { font-size:4em; }
+    #london_city    { font-size:4em; }
+    #paris_city     { font-size:4em; }
+    #sydney_city    { font-size:4em; }
+    ul li {font-size:8em}
+    padding:0px
+}
+
+@media only screen and (max-width: 900px) {
+    button { 
+        margin: 30px 20px 30px 20px;
+        width: 149px; 
+        height:132px;
     }
-    button#book {
-        background-image: url("/images/book.png");
-        background-size: 100%;
-        background-repeat: no-repeat;
+    #seoul_city     { font-size:3em; }
+    #newyork_city   { font-size:3em; }
+    #beijing_city   { font-size:3em; }
+    #london_city    { font-size:3em; }
+    #paris_city     { font-size:3em; }
+    #sydney_city    { font-size:3em; }
+    ul li {font-size:6em}
+    padding:0px
+}
+
+@media only screen and (max-width: 700px) {
+    button { 
+        margin: 30px 15px 30px 15px;
+        width: 121px; 
+        height:105px;
     }
-    button#jing {
-        background-image: url("/images/jing.png");
-        background-size: 100%;
-        background-repeat: no-repeat;
-    }    
+    #seoul_city     { font-size:2em; }
+    #newyork_city   { font-size:2em; }
+    #beijing_city   { font-size:2em; }
+    #london_city    { font-size:2em; }
+    #paris_city     { font-size:2em; }
+    #sydney_city    { font-size:2em; }
+    ul li {font-size:4em}
+    padding:0px
+}
     
