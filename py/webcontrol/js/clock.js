@@ -238,7 +238,7 @@ var customizeForDevice = function(){
       iphone: ua.match(/iPhone/)
     };                                       
     if (checker.iphone){     
-        $("li").css({"font-size":"6em"}); 
+        $("li").css({"font-size":"6.5em"}); 
         $("#seoul_city  ").css({"font-size":"4.5em"});
         $("#newyork_city").css({"font-size":"4.5em"});
         $("#beijing_city").css({"font-size":"4.5em"});
