@@ -29,6 +29,7 @@
 #define PARIS   4
 #define SYDNEY  5
 
+//INPUT PIN에 따라 offset 세팅
 #define OFFSET_SEOUL     0
 #define OFFSET_NEWYORK  -1
 #define OFFSET_BEIJING  -1
@@ -100,10 +101,6 @@ unsigned char digit2[10] = {
 
 unsigned char strFormat[7];
 unsigned char digitNum;
-
-
-//INPUT PIN에 따라 offset 세팅
-
 
 void Latch();
 void LED_out(unsigned char no);
