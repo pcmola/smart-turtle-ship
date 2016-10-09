@@ -3,15 +3,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Jagyeongnoo Digital Clock</title>
+<title>Jagyeongnu Digital Clock</title>
 
-<script type="text/javascript" src="/js/jquery-3.1.0.min.js"></script>
-<script type="text/javascript" src="/webiopi.js"></script>
-<script type="text/javascript" src="/js/clock.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/clock.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="../webiopi.js"></script>
+<script type="text/javascript" src="../js/clock.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/clock.css">
 </head>
 <body>
-<table width=100%>
+<table width=100% style="margin-top:10px;">
     <tr>
         <td id="seoul_bg" width="50%">
             <ul>
@@ -79,8 +79,17 @@
         </td>
     </tr>
 </table>
-    <div id="content" align="center">
-    </div>
+<table width=100% style="margin:0px;">
+    <tr>
+        <td>
+            <div id="content" align="center">
+            </div>
+        </td>
+        <td>
+            <table><tr><td><div id="alarm_onoff" align="left"></td></tr></table>
+            <table><tr><td><div id="alarm_config" align="left"></td></tr></table>              
+        </td>
+    </tr>
+</table>
 </body>
 </html>
-
