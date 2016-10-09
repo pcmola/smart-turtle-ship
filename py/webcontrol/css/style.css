@@ -1,10 +1,48 @@
 body{
      background:#202020;
-     font:bold 12px Arial, Helvetica, sans-serif;
+     font:bold 12px 'DSDIGI', Arial, Helvetica, sans-serif;
      margin:0;
      padding:0;
      color:#bbbbbb; 
 }
+
+
+label {
+    font-size:5em;
+    font-weight:bold;
+}
+select {
+    font-size:3em;font-family:'DSDIGI', Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    margin:30px 10px 0px 10px;
+}
+
+input {
+    font-size:3em;font-family:'DSDIGI', Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    margin:30px 10px 0px 10px;
+}
+
+div {
+    text-align:center; 
+}
+
+.color_blue {
+    color:#2060B4;
+}
+
+.color_red {
+    color:#C10000;
+}
+
+.color_green {
+    color:#008F2E;
+}
+
+.color_yellow {
+    color:#FFD90A;
+}
+
 
 
 @font-face {
@@ -61,25 +99,60 @@ button {
     
 }
 button#jong {
-    background-image: url("/images/jong.png");
+    background-image: url("../images/jong.png");
     background-size: 100%;
     background-repeat: no-repeat;
 }
 button#book {
-    background-image: url("/images/book.png");
+    background-image: url("../images/book.png");
     background-size: 100%;
     background-repeat: no-repeat;
 }
 button#jing {
-    background-image: url("/images/jing.png");
+    background-image: url("../images/jing.png");
     background-size: 100%;
     background-repeat: no-repeat;
-}    
+}
 
+.alarm_on {
+    background-image: url("../images/alarm/alarm_on.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 80px;
+    height:80px;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+}
+
+.alarm_off {
+    background-image: url("../images/alarm/alarm_off.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 80px;
+    height:80px;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+}
+    
+.alarm_config {
+    background-image: url("../images/alarm/gear.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 80px;
+    height:80px;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;    
+}
 /*ipad 공용*/
 @media only screen and (max-width: 1100px) {
     button { 
-        margin: 50px 25px 30px 25px;
+        margin: 50px 20px 30px 20px;
         width: 243px; 
         height:211px;
     }
@@ -90,12 +163,16 @@ button#jing {
     #paris_city     { font-size:4em; }
     #sydney_city    { font-size:4em; }
     ul li {font-size:8em}
+    .alarm_on  { width:70px; height:70px }
+    .alarm_off  { width:70px; height:70px }
+    .alarm_config { width:70px; height:70px }
     padding:0px
+
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 950px) {
     button { 
-        margin: 30px 20px 30px 20px;
+        margin: 30px 10px 30px 10px;
         width: 149px; 
         height:132px;
     }
@@ -106,12 +183,15 @@ button#jing {
     #paris_city     { font-size:3em; }
     #sydney_city    { font-size:3em; }
     ul li {font-size:6em}
+    .alarm_on  { width:50px; height:50px }
+    .alarm_off  { width:50px; height:50px }
+    .alarm_config { width:50px; height:50px }
     padding:0px
 }
 
 @media only screen and (max-width: 700px) {
     button { 
-        margin: 30px 15px 30px 15px;
+        margin: 30px 5px 30px 5px;
         width: 121px; 
         height:105px;
     }
@@ -122,6 +202,8 @@ button#jing {
     #paris_city     { font-size:2em; }
     #sydney_city    { font-size:2em; }
     ul li {font-size:4em}
+    .alarm_on { width:45px; height:45px }
+    .alarm_off  { width:45px; height:45px }
+    .alarm_config { width:45px; height:45px }
     padding:0px
 }
-    
