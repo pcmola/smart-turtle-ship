@@ -1,4 +1,5 @@
 var GPIO_ARRAY = [22, 23, 24, 25];
+var SERVER_IP = "192.168.0.8";
 webiopi().ready(function() {
     /*
     GPIO PIN 세 개(22~24) ON/OFF에 따라 표시할 지역 결정
@@ -25,11 +26,22 @@ webiopi().ready(function() {
 
     button = webiopi().createMacroButton("jing", "", "jing_strike");
     content.append(button);
-   
-   customizeForDevice();
-});
+    
+    var alarm_onoff = $('<img onclick="changeAlarmFlag()" />');
+    alarm_onoff.appendTo($("#alarm_onoff"));  
 
-$(document).ready(function() {
+    //Get alarm flag and set the alarm image
+    getAlarmFlag();
+    
+    $("#alarm_onoff").click(function(){
+        changeAlarmFlag();
+    });
+    
+    var alarm_config = $('<img class="alarm_config" onclick="moveConfig()" />');
+    alarm_config.appendTo($("#alarm_config"));    
+   
+    customizeForDevice();
+
     
     //시차 설정(서울 기준)
     var OFFSET_NEWYORK = -13;
@@ -83,10 +95,12 @@ $(document).ready(function() {
     $("#london_city").html("London&nbsp");
     $("#paris_city").html("Paris&nbsp");
     $("#sydney_city").html("Sydney&nbsp");
-
-    //도시별, 시간의 10의 자리 세팅(1~12시 표시 기준)
+    
     setInterval( function() {
         var hours = new Date().getHours();
+        var minutes = new Date().getMinutes();
+        
+        //도시별, 시간의 10의 자리 세팅(1~12시 표시 기준)
         $("#seoul_hours1").html(calcHours1(hours));
         
         var newyork_hours = resetHours(hours, OFFSET_NEWYORK);
@@ -104,12 +118,8 @@ $(document).ready(function() {
         var sydney_hours = resetHours(hours, OFFSET_SYDNEY);
         $("#sydney_hours1").html(calcHours1(sydney_hours));
         
-    }, 1000);
 
-
-    //도시별 시간의 1의 자리 세팅(1~12시 표시 기준)
-    setInterval( function() {
-        var hours = new Date().getHours();
+        //도시별 시간의 1의 자리 세팅(1~12시 표시 기준)
         $("#seoul_hours2").html(calcHour2(hours));
             
         var newyork_hours = resetHours(hours, OFFSET_NEWYORK);
@@ -126,22 +136,16 @@ $(document).ready(function() {
                 
         var sydney_hours = resetHours(hours, OFFSET_SYDNEY);
         $("#sydney_hours2").html(calcHour2(sydney_hours));
-    }, 1000);
-        
-    //도시별 분의 10의 자리 세팅
-    setInterval( function() {
-        var minutes = new Date().getMinutes();
+
+        //도시별 분의 10의 자리 세팅   
         $("#seoul_min1").html(Math.floor(minutes/10, 1));
         $("#newyork_min1").html(Math.floor(minutes/10, 1));
         $("#beijing_min1").html(Math.floor(minutes/10, 1));
         $("#london_min1").html(Math.floor(minutes/10, 1));
         $("#paris_min1").html(Math.floor(minutes/10, 1));
         $("#sydney_min1").html(Math.floor(minutes/10, 1));
-    },1000);
         
-    //도시별 분의 1의 자리 세팅
-    setInterval( function() {
-        var minutes = new Date().getMinutes();
+        //도시별 분의 1의 자리 세팅
         $("#seoul_min2").html(minutes-(Math.floor(minutes/10)*10));
         $("#newyork_min2").html(minutes-(Math.floor(minutes/10)*10));
         $("#beijing_min2").html(minutes-(Math.floor(minutes/10)*10));
@@ -149,10 +153,20 @@ $(document).ready(function() {
         $("#paris_min2").html(minutes-(Math.floor(minutes/10)*10));
         $("#sydney_min2").html(minutes-(Math.floor(minutes/10)*10)); 
         
-    },1000);                
-
+    },1000);
     
-   
+    //Run Alarm
+    setInterval(function() {
+        url= "http://" + SERVER_IP + ":8000/macros/runAlarm/"; // url to the pi -> http is required          
+        jQuery.ajax({                          
+            url: url,                        
+            type: 'POST',
+            success: function(data){     
+            },
+            error :function() {       
+            },
+        })
+    },10000);
 }); 
 
 
@@ -164,7 +178,6 @@ function calcHours1(hours) {
         return "&nbsp;"
     }
 }
-
 
 //시간 1의 자리 표시
 function calcHour2(hours) {
@@ -246,5 +259,69 @@ var customizeForDevice = function(){
         $("#paris_city  ").css({"font-size":"4.5em"});
         $("#sydney_city ").css({"font-size":"4.5em"}); 
         $("button").css({"margin":"8px 25px 8px 25px", "width":"149px", "height":"132px"}); 
+        $("#alarm_onoff").css({"width":"55px", "height":"55px"});
+        $(".alarm_config").css({"width":"55px", "height":"55px"});
     }     
-}                                   
+}
+
+function getAlarmFlag() {
+    alarm_flag_url= "http://" + SERVER_IP + ":8000/macros/getAlarmFlag/"; // url to the pi -> http is required          
+    jQuery.ajax({                          
+        url: alarm_flag_url,                        
+        type: 'POST',
+        success: function(data){   
+            if(data.slice(0,9) == "ALARM_OFF") {
+                $("#alarm_onoff").addClass("alarm_off");
+            }
+            else if(data.slice(0,8) == "ALARM_ON") {
+                $("#alarm_onoff").addClass("alarm_on"); 
+            }
+        },
+        error :function() {       
+            alert("Get Alarm Flag Error");  
+        },
+    })
+}
+
+function changeAlarmFlag() {
+    flag_get_url= "http://" + SERVER_IP + ":8000/macros/getAlarmFlag/";   
+    jQuery.ajax({                          
+        url: flag_get_url,                        
+        type: 'POST',
+        success: function(data){
+            //alert(data);
+            if(data.slice(0,9) == "ALARM_OFF") {
+                $("#alarm_onoff").removeClass("alarm_off");
+                $("#alarm_onoff").addClass("alarm_on"); 
+                setAlarmFlag("ALARM_ON");
+               
+            }
+            else if(data.slice(0,8) == "ALARM_ON") {
+               $("#alarm_onoff").removeClass("alarm_on");
+               $("#alarm_onoff").addClass("alarm_off");
+               setAlarmFlag("ALARM_OFF");
+            }
+        },
+        error :function() {       
+            alert("Change Alarm Flag Error");  
+        },
+    })
+}      
+
+function setAlarmFlag(alarm_flag) {
+    flag_set_url = "http://" + SERVER_IP + ":8000/macros/setAlarmFlag/" + alarm_flag;
+    jQuery.ajax({                          
+        url: flag_set_url,                        
+        type: 'POST',
+        success: function(data){
+
+        },
+        error :function() {       
+            alert("Set Alarm Flag Error");  
+        },
+    })
+}  
+
+function moveConfig() {
+    location.href='../clock/config.html';
+}
