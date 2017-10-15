@@ -1,0 +1,244 @@
+begin
+	prog = irtest
+	button = KEY_UP
+	config = up
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_UP2
+	config = up
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_UP3
+	config = up
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_DOWN
+	config = down
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_DOWN2
+	config = down
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_DOWN3
+	config = down
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_DOWN4
+	config = down
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_RIGHT
+	config = right
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_RIGHT2
+	config = right
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_RIGHT3
+	config = right
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_LEFT
+	config = left
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_LEFT2
+	config = left
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_LEFT3
+	config = left
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F1
+	config = f1
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F1_2
+	config = f1
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F1_3
+	config = f1
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F2
+	config = f2
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F2_2
+	config = f2
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F2_3
+	config = f2
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F3
+	config = f3
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F3_2
+	config = f3
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F3_3
+	config = f3
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F4
+	config = f4
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F4_2
+	config = f4
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F4_3
+	config = f4
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F5
+	config = f5
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F5_2
+	config = f5
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F5_3
+	config = f5
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F6
+	config = f6
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F6_2
+	config = f6
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_F6_3
+	config = f6
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_UP_LEFT
+	config = upleft
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_UP_RIGHT
+	config = upright
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_DOWN_LEFT
+	config = downleft
+	repeat = 1
+end
+
+begin
+	prog = irtest
+	button = KEY_DOWN_RIGHT
+	config = downright
+	repeat = 1
+end
