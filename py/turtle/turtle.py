@@ -8,7 +8,7 @@ import os
 import Adafruit_DHT
 import I2C_LCD_driver
 mylcd = I2C_LCD_driver.lcd()
-ON_OFF_POINT = 50
+ON_OFF_POINT = 70
 
 KEY_UP = "up"
 KEY_DOWN = "down"
@@ -43,6 +43,8 @@ print("Smart Turtle Ship started")
 
 socketid = lirc.init("irtest", blocking=False)
 usb_control_file = '/home/pi/py/turtle/files/usb.conf'
+movement_control_file = '/home/pi/py/turtle/files/move.conf'
+humid_control_file = '/home/pi/py/turtle/files/humid.conf'
 
 # USB Initialize
 try:
@@ -54,13 +56,6 @@ try:
 except IOError:
     print("Cannot find file: " + usb_control_file)
 
-
-# Set Hum Arrary
-humArr = [100,100,100,100,100,100,100,100,100,100]
-#print(humArr)
-print ("H/T Check Start")
-mylcd.lcd_display_string("H/T Check Start")
- 
 
 def changeUSBState():
     try:
@@ -78,39 +73,59 @@ def changeUSBState():
             fout = open(usb_control_file, 'w')
             fout.write("USB_OFF\n")
             fout.close()
+
+            fout = open(humid_control_file, 'w')
+            fout.write("HUMID_OFF\n")
+            fout.close()
+
             print("USB ON->OFF")
+            print("Humidifier ON->OFF")
         except IOError:
             print("Cannot find file: " + usb_control_file)
     else :
         os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
-
+        
         try:
             fout = open(usb_control_file, 'w')
             fout.write("USB_ON\n")
             fout.close()
+
+            fout = open(humid_control_file, 'w')
+            fout.write("HUMID_ON\n")
+            fout.close()
+
             print("USB OFF->ON")
+            print("Humidifier OFF->ON")
         except IOError:
             print("Cannot find file: " + usb_control_file)
 
+def changeAutoManualState():
+    try:
+        fin = open(movement_control_file, 'r')
+        move_flag = fin.read()
+        fin.close()
+    
+    except IOError:
+        print("file read error")
+    
+    if move_flag[0:9] == "MOVE_AUTO":
+        try:
+            fout = open(movement_control_file, 'w')
+            fout.write("MOVE_MANUAL\n")
+            fout.close()
+            print("Movement AUTO->MANUAL")
+        except IOError:
+            print("Cannot find file: " + movement_control_file)
+    else :
+        os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
 
-# 평균 구하기. 최소값, 최대값 제외
-def avgval(humArr):  
-    tempHum = 0.0 
-    for i in humArr:
-        tempHum += i  
-    return (tempHum-max(humArr)-min(humArr))/(len(humArr)-2)  
-
-
-#배열 내 모든 값에 최초 습도값 저장
-humidity, temperature = Adafruit_DHT.read_retry(11, 27)  # GPIO27 (BCM notation)
-mylcd.lcd_display_string("Program Start...")
- 
-#센서 오작동하는 경우가 있어, 습도 100 넘으면 다시 측정
-if humidity > 100 :
-    humidity, temperature = Adafruit_DHT.read_retry(11, 27)  # GPIO27 (BCM notation)
-for x in range(len(humArr)-1, -1, -1) :
-    humArr[x] = humidity
-#print(humArr)
+        try:
+            fout = open(movement_control_file, 'w')
+            fout.write("MOVE_AUTO\n")
+            fout.close()
+            print("MOVE MANUAL->AUTO")
+        except IOError:
+            print("Cannot find file: " + movement_control_file)
 
 try:
     while(True):
@@ -135,13 +150,13 @@ try:
             #Left
             elif codeIR[0] == KEY_LEFT:
                 print "KEY_LEFT pressed"
-                lr_speed.ChangeDutyCycle(40) 
+                lr_speed.ChangeDutyCycle(45) 
                 GPIO.output(lr_dir_pin, False)
 
             #RIGHT
             elif codeIR[0] == KEY_RIGHT:
                 print "KEY_RIGHT pressed"
-                lr_speed.ChangeDutyCycle(40) 
+                lr_speed.ChangeDutyCycle(45) 
                 GPIO.output(lr_dir_pin, True)
 
             
@@ -154,7 +169,7 @@ try:
             elif codeIR[0] == KEY_DOWN_RIGHT:
                 print "KEY_DOWN_RIGHT pressed"
             
-            #Change the USB state
+            #USB On/Off
             elif codeIR[0] == KEY_F1:
                 print "KEY_F1 pressed"
                 changeUSBState()
@@ -171,9 +186,12 @@ try:
                 time.sleep(1)
                 os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
                 os.system('aplay /home/pi/py/music/cannon.wav')
-
+            
+            #USB(Humidifier/Light) Mode Change(Manual <-> Auto)
             elif codeIR[0] == KEY_F4:
                 print "KEY_F4 pressed"
+                changeAutoManualState()
+
             elif codeIR[0] == KEY_F5:
                 print "KEY_F5 pressed"
             elif codeIR[0] == KEY_F6:
@@ -184,24 +202,6 @@ try:
             #GPIO.output(lr_pwn_pin, False)
             lr_speed.ChangeDutyCycle(0) 
         
-        humidity, temperature = Adafruit_DHT.read_retry(11, 27)  # GPIO27 (BCM notation)
-        for x in range(len(humArr)-1, -1, -1) :
-            if (x > 0) :
-                humArr[x] = humArr[x-1]
-            elif (x == 0) :
-                humArr[x] = humidity
-        avgHum = round(avgval(humArr), 1)
-        print ("Humidity = {} %; Temperature = {} C".format(avgHum, temperature))
-        mylcd.lcd_display_string(u"{} %; {} C  ".format(avgHum, temperature), 1)
- 
-        #습도가 기준치 이하면 가습기 OFF
-        if (avgHum < ON_OFF_POINT) :
-            mylcd.lcd_display_string(u"Humidifier On   ", 2)
-            os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
-        else :
-            mylcd.lcd_display_string(u"Humidifier Off  ", 2)
-            os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 0")
-
 except KeyboardInterrupt:
     lirc.deinit()
 
@@ -212,13 +212,16 @@ finally:
     os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
     mylcd.lcd_clear()
     print("Program End")
-    mylcd.lcd_display_string("Program End")
+    mylcd.lcd_display_string("Program End     ")
     time.sleep(0.5)
-    mylcd.lcd_display_string("Program End.")
+    mylcd.lcd_display_string("Program End.    ")
     time.sleep(0.5)
-    mylcd.lcd_display_string("Program End..")
+    mylcd.lcd_display_string("Program End..   ")
     time.sleep(0.5)
-    mylcd.lcd_display_string("Program End...")
+    print("Program End..")
+    mylcd.lcd_display_string("Program End...  ")
     time.sleep(0.5)
     mylcd.lcd_clear()
  
+
+
