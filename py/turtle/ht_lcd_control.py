@@ -57,17 +57,17 @@ try:
 
         mode = ""
         if (move_flag[0:9] == "MOVE_AUTO") :
-            mode = "(Auto)"
+            mode = "Auto)"
         else :
-            mode = "(Manual)"
+            mode = "Manual)"
 
         #auto일 때에만, 습도가 기준치 이상일 때 USB(가습기/LED) OFF
         if (move_flag[0:9] == "MOVE_AUTO") :
             if (avgHum > ON_OFF_POINT) :
-                mylcd.lcd_display_string(mode + "HumidOff  ", 2)
+                mylcd.lcd_display_string(mode + "Humid Off  ", 2)
                 os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 0")
             else :
-                mylcd.lcd_display_string(mode + "HumidOn   ", 2)
+                mylcd.lcd_display_string(mode + "Humid On   ", 2)
                 os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
 
         #manual일 때에는 humid.conf 파일 읽어서 판단
@@ -79,12 +79,12 @@ try:
             
             except IOError:
                 print("file read error")
-            print humid_flag
+            #print humid_flag
             if (humid_flag[0:9] == "HUMID_OFF") :
-                mylcd.lcd_display_string(mode + "HumidOff  ", 2)
+                mylcd.lcd_display_string(mode + "Humid Off  ", 2)
                 os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 0")
             else :
-                mylcd.lcd_display_string(mode + "HumidOn   ", 2)
+                mylcd.lcd_display_string(mode + "Humid On   ", 2)
                 os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
         
         time.sleep(1)
@@ -103,5 +103,4 @@ except:
     mylcd.lcd_display_string("Program End...")
     time.sleep(0.5)
     mylcd.lcd_clear()
- 
-
+    
