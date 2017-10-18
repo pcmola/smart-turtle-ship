@@ -159,15 +159,37 @@ try:
                 lr_speed.ChangeDutyCycle(45) 
                 GPIO.output(lr_dir_pin, True)
 
-            
+            #Go, Left
             elif codeIR[0] == KEY_UP_LEFT:
                 print "KEY_UP_LEFT pressed"
+                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_dir_pin, False)
+                lr_speed.ChangeDutyCycle(70) 
+                GPIO.output(lr_dir_pin, False)
+            
+            #Go, Right
             elif codeIR[0] == KEY_UP_RIGHT:
                 print "KEY_UP_RIGHT pressed"
+                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_dir_pin, False)
+                lr_speed.ChangeDutyCycle(70) 
+                GPIO.output(lr_dir_pin, True)
+            
+            #Back, Left
             elif codeIR[0] == KEY_DOWN_LEFT:
                 print "KEY_DOWN_LEFT pressed"
+                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_dir_pin, True)
+                lr_speed.ChangeDutyCycle(70) 
+                GPIO.output(lr_dir_pin, False)
+            
+            #Back, Right
             elif codeIR[0] == KEY_DOWN_RIGHT:
                 print "KEY_DOWN_RIGHT pressed"
+                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_dir_pin, True)
+                lr_speed.ChangeDutyCycle(70) 
+                GPIO.output(lr_dir_pin, True)
             
             #USB On/Off
             elif codeIR[0] == KEY_F1:
