@@ -23,18 +23,18 @@ KEY_F4 = "f4"
 KEY_F5 = "f5"
 KEY_F6 = "f6"
 
-goback_pwn_pin = 16
-goback_dir_pin = 12
-lr_pwn_pin     = 19
-lr_dir_pin     = 13
+goback_pwm_pin = 16  #GO, BACK PWM(SPEED) PIN
+goback_dir_pin = 12  #GO, BACK DIRECTION PIN
+lr_pwm_pin     = 19  #LEFT, RIGHT PWM(SPEED) PIN
+lr_dir_pin     = 13  #LEFT, RIGHT DIRECTION PIN
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(goback_pwn_pin, GPIO.OUT)
+GPIO.setup(goback_pwm_pin, GPIO.OUT)
 GPIO.setup(goback_dir_pin, GPIO.OUT)
-GPIO.setup(lr_pwn_pin,     GPIO.OUT)
+GPIO.setup(lr_pwm_pin,     GPIO.OUT)
 GPIO.setup(lr_dir_pin,     GPIO.OUT)
 
-lr_speed = GPIO.PWM(lr_pwn_pin, 500)
+lr_speed = GPIO.PWM(lr_pwm_pin, 500)
 lr_speed.start(0)
 
 print("Smart Turtle Ship started")
@@ -138,13 +138,13 @@ try:
             #Go
             if codeIR[0] == KEY_UP:
                 print "KEY_UP pressed"
-                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_pwm_pin, True)
                 GPIO.output(goback_dir_pin, False)
 
             #Back
             elif codeIR[0] == KEY_DOWN:
                 print "KEY_DOWN pressed"
-                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_pwm_pin, True)
                 GPIO.output(goback_dir_pin, True)
 
             #Left
@@ -162,7 +162,7 @@ try:
             #Go, Left
             elif codeIR[0] == KEY_UP_LEFT:
                 print "KEY_UP_LEFT pressed"
-                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_pwm_pin, True)
                 GPIO.output(goback_dir_pin, False)
                 lr_speed.ChangeDutyCycle(70) 
                 GPIO.output(lr_dir_pin, False)
@@ -170,7 +170,7 @@ try:
             #Go, Right
             elif codeIR[0] == KEY_UP_RIGHT:
                 print "KEY_UP_RIGHT pressed"
-                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_pwm_pin, True)
                 GPIO.output(goback_dir_pin, False)
                 lr_speed.ChangeDutyCycle(70) 
                 GPIO.output(lr_dir_pin, True)
@@ -178,7 +178,7 @@ try:
             #Back, Left
             elif codeIR[0] == KEY_DOWN_LEFT:
                 print "KEY_DOWN_LEFT pressed"
-                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_pwm_pin, True)
                 GPIO.output(goback_dir_pin, True)
                 lr_speed.ChangeDutyCycle(70) 
                 GPIO.output(lr_dir_pin, False)
@@ -186,7 +186,7 @@ try:
             #Back, Right
             elif codeIR[0] == KEY_DOWN_RIGHT:
                 print "KEY_DOWN_RIGHT pressed"
-                GPIO.output(goback_pwn_pin, True)
+                GPIO.output(goback_pwm_pin, True)
                 GPIO.output(goback_dir_pin, True)
                 lr_speed.ChangeDutyCycle(70) 
                 GPIO.output(lr_dir_pin, True)
@@ -231,7 +231,7 @@ try:
                 print "KEY_F6 pressed"
             
             time.sleep(0.35)
-            GPIO.output(goback_pwn_pin, False)
+            GPIO.output(goback_pwm_pin, False)
             lr_speed.ChangeDutyCycle(0) 
         
         time.sleep(0.01)
