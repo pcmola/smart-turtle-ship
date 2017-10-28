@@ -18,8 +18,10 @@ try:
             print("file read error")
 
         if (dragon_flag[0:9] == "DRAGON_ON") :
+            os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 0")
+            time.sleep(1)
+            os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")                
             os.system("aplay /home/pi/py/music/dragon.wav")
-
             try:
                 fout = open(dragon_control_file, 'w')
                 fout.write("DRAGON_OFF\n")
