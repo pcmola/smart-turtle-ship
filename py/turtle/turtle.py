@@ -6,8 +6,6 @@ import lirc
 import time
 import os
 import Adafruit_DHT
-import I2C_LCD_driver
-mylcd = I2C_LCD_driver.lcd()
 ON_OFF_POINT = 70
 
 KEY_UP = "up"
@@ -42,9 +40,11 @@ lr_speed.start(0)
 print("Smart Turtle Ship started")
 
 socketid = lirc.init("irtest", blocking=False)
-usb_control_file = '/home/pi/py/turtle/files/usb.conf'
+usb_control_file      = '/home/pi/py/turtle/files/usb.conf'
 movement_control_file = '/home/pi/py/turtle/files/move.conf'
-humid_control_file = '/home/pi/py/turtle/files/humid.conf'
+humid_control_file    = '/home/pi/py/turtle/files/humid.conf'
+cannon_control_file   = '/home/pi/py/turtle/files/cannon.conf'
+dragon_control_file   = '/home/pi/py/turtle/files/dragon.conf'
 
 # USB Initialize
 try:
@@ -150,13 +150,13 @@ try:
             #Left
             elif codeIR[0] == KEY_LEFT:
                 print "KEY_LEFT pressed"
-                lr_speed.ChangeDutyCycle(45) 
+                lr_speed.ChangeDutyCycle(43) 
                 GPIO.output(lr_dir_pin, False)
 
             #RIGHT
             elif codeIR[0] == KEY_RIGHT:
                 print "KEY_RIGHT pressed"
-                lr_speed.ChangeDutyCycle(45) 
+                lr_speed.ChangeDutyCycle(43) 
                 GPIO.output(lr_dir_pin, True)
 
             #Go, Left
@@ -199,7 +199,17 @@ try:
             #Dragon Sound
             elif codeIR[0] == KEY_F2:
                 print "KEY_F2 pressed"
-                os.system('aplay /home/pi/py/music/dragon.wav')
+                os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 0")
+                time.sleep(1)
+                os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
+                try:
+                    fout = open(dragon_control_file, 'w')
+                    fout.write("DRAGON_ON\n")
+                    fout.close()
+
+                    print("DRAGON OFF->ON")
+                except IOError:
+                    print("Cannot find file: " + cannon_control_file)
 
             #Cannon Sound
             elif codeIR[0] == KEY_F3:
@@ -207,8 +217,15 @@ try:
                 os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 0")
                 time.sleep(1)
                 os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
-                os.system('aplay /home/pi/py/music/cannon.wav')
-            
+                try:
+                    fout = open(cannon_control_file, 'w')
+                    fout.write("CANNON_ON\n")
+                    fout.close()
+
+                    print("CANNON OFF->ON")
+                except IOError:
+                    print("Cannot find file: " + cannon_control_file)
+
             #USB(Humidifier/Light) Mode Change(Manual <-> Auto)
             elif codeIR[0] == KEY_F4:
                 print "KEY_F4 pressed"
@@ -221,7 +238,6 @@ try:
             
             time.sleep(0.35)
             GPIO.output(goback_pwn_pin, False)
-            #GPIO.output(lr_pwn_pin, False)
             lr_speed.ChangeDutyCycle(0) 
         
 except KeyboardInterrupt:
@@ -232,18 +248,6 @@ finally:
     GPIO.cleanup()
 
     os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
-    mylcd.lcd_clear()
     print("Program End")
-    mylcd.lcd_display_string("Program End     ")
-    time.sleep(0.5)
-    mylcd.lcd_display_string("Program End.    ")
-    time.sleep(0.5)
-    mylcd.lcd_display_string("Program End..   ")
-    time.sleep(0.5)
-    print("Program End..")
-    mylcd.lcd_display_string("Program End...  ")
-    time.sleep(0.5)
-    mylcd.lcd_clear()
- 
 
 
