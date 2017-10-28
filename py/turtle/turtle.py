@@ -240,6 +240,8 @@ try:
             GPIO.output(goback_pwn_pin, False)
             lr_speed.ChangeDutyCycle(0) 
         
+        time.sleep(0.01)
+
 except KeyboardInterrupt:
     lirc.deinit()
 
