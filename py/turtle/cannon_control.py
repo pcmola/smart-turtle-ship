@@ -18,8 +18,10 @@ try:
             print("file read error")
 
         if (cannon_flag[0:9] == "CANNON_ON") :
+            os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 0")
+            time.sleep(1)
+            os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
             os.system("aplay /home/pi/py/music/cannon.wav")
-
             try:
                 fout = open(cannon_control_file, 'w')
                 fout.write("CANNON_OFF\n")
