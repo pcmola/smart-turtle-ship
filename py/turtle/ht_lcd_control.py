@@ -7,15 +7,15 @@ import I2C_LCD_driver
 mylcd = I2C_LCD_driver.lcd()
 ON_OFF_POINT = 50
 movement_control_file = '/home/pi/py/turtle/files/move.conf'
-humid_control_file = '/home/pi/py/turtle/files/humid.conf'
+humid_control_file    = '/home/pi/py/turtle/files/humid.conf'
 
-# 최초에 10개로 배열 크기 지정
+# Set the umidty array the size 10
 humArr = [100,100,100,100,100,100,100,100,100,100]
 #print(humArr)
 print ("Program Start")
 mylcd.lcd_display_string("Program Start..")
  
-# 평균 구하기. 최소값, 최대값 제외
+# Calculate the average except MIN/MAX.
 def avgval(humArr):  
     tempHum = 0.0 
     for i in humArr:
@@ -23,16 +23,15 @@ def avgval(humArr):
     return (tempHum-max(humArr)-min(humArr))/(len(humArr)-2)  
  
  
-#배열 내 모든 값에 최초 습도값 저장
+#Save the origin humidity in all array values
 humidity, temperature = Adafruit_DHT.read_retry(11, 27)  # GPIO27 (BCM notation)
 mylcd.lcd_display_string("Program Start...")
  
-#센서 오작동하는 경우가 있어, 습도 100 넘으면 다시 측정
+#Sensing again when humidity is over 100 in case of sensing error
 if humidity > 100 :
     humidity, temperature = Adafruit_DHT.read_retry(11, 27)  # GPIO27 (BCM notation)
 for x in range(len(humArr)-1, -1, -1) :
     humArr[x] = humidity
-#print(humArr)
 
 try:
     while True:
@@ -45,8 +44,7 @@ try:
         avgHum = round(avgval(humArr), 1)
         print ("Humidity = {} %; Temperature = {} C".format(avgHum, temperature))
         mylcd.lcd_display_string(u"{} %; {} C  ".format(avgHum, temperature), 1)
- 
-        #습도가 기준치 이하이고 상태가 AUTO면 가습기 OFF
+        
         try:
             fin = open(movement_control_file, 'r')
             move_flag = fin.read()
@@ -61,7 +59,7 @@ try:
         else :
             mode = "Manual)"
 
-        #auto일 때에만, 습도가 기준치 이상일 때 USB(가습기/LED) OFF
+        #When auto mode, If the humidity is under the ON_OFF_POINT, turn off the himidifier
         if (move_flag[0:9] == "MOVE_AUTO") :
             if (avgHum > ON_OFF_POINT) :
                 mylcd.lcd_display_string(mode + "Humid Off  ", 2)
@@ -70,7 +68,7 @@ try:
                 mylcd.lcd_display_string(mode + "Humid On   ", 2)
                 os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
 
-        #manual일 때에는 humid.conf 파일 읽어서 판단
+        #Whdn manual mode, judge reading humid.conf file
         else :
             try:
                 fin = open(humid_control_file, 'r')
@@ -79,7 +77,6 @@ try:
             
             except IOError:
                 print("file read error")
-            #print humid_flag
             if (humid_flag[0:9] == "HUMID_OFF") :
                 mylcd.lcd_display_string(mode + "Humid Off  ", 2)
                 os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 0")
@@ -89,18 +86,17 @@ try:
         
         time.sleep(1)
  
-#종료시 USB ON, LCD 초기화
+#USB ON, LCD Initialize when exit
 except:
     os.system("sudo /home/pi/py/hub-ctrl -h 0 -P 2 -p 1")
     mylcd.lcd_clear()
     print("Program End")
     mylcd.lcd_display_string("Program End")
-    time.sleep(0.5)
+    time.sleep(0.2)
     mylcd.lcd_display_string("Program End.")
-    time.sleep(0.5)
+    time.sleep(0.2)
     mylcd.lcd_display_string("Program End..")
-    time.sleep(0.5)
+    time.sleep(0.2)
     mylcd.lcd_display_string("Program End...")
-    time.sleep(0.5)
+    time.sleep(0.2)
     mylcd.lcd_clear()
-    
