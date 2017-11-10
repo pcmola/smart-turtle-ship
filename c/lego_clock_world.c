@@ -16,10 +16,12 @@
 #define CITY2 4  // BCM GPIO 23
 #define CITY3 5  // BCM GPIO 24
 
+#define GREEN_VCC 10 // BCM GPIO 8
+#define GREEN_GND 11 // BCM GPIO 7
 
 #define ON_OFF  6  // BCM GPIO 25
 
-#define INTERVAL_GREEN  2000 // us
+#define INTERVAL_GREEN  500 // us
 #define INTERVAL_COMMON  500 // us
 
 #define SEOUL   0
@@ -29,7 +31,6 @@
 #define PARIS   4
 #define SYDNEY  5
 
-//INPUT PIN에 따라 offset 세팅
 #define OFFSET_SEOUL     0
 #define OFFSET_NEWYORK  -1
 #define OFFSET_BEIJING  -1
@@ -102,6 +103,10 @@ unsigned char digit2[10] = {
 unsigned char strFormat[7];
 unsigned char digitNum;
 
+
+//INPUT PIN에 따라 offset 세팅
+
+
 void Latch();
 void LED_out(unsigned char no);
 void INThandler(int);
@@ -133,11 +138,15 @@ int main() {
     pinMode(CITY2,  OUTPUT);
     pinMode(CITY3,  OUTPUT);
     pinMode(ON_OFF, OUTPUT);
+	pinMode(GREEN_VCC, OUTPUT);
+	pinMode(GREEN_GND, OUTPUT);
     pullUpDnControl(CITY1,  PUD_DOWN);
     pullUpDnControl(CITY2,  PUD_DOWN);
     pullUpDnControl(CITY3,  PUD_DOWN);
     pullUpDnControl(ON_OFF, PUD_DOWN);
-    
+    pullUpDnControl(GREEN_VCC, PUD_DOWN);
+	pullUpDnControl(GREEN_GND, PUD_DOWN);
+
     digitalWrite(ON_OFF, 1);
     while(1) {
         if (digitalRead(ON_OFF) == HIGH) {
@@ -209,10 +218,13 @@ int main() {
             //printf("hour :%s\n", strFormat);
             //sleep(1);
 
-            LED_out(0);
             if(strFormat[0] == '1') {
-                usleep(INTERVAL_GREEN);
-            }
+				//LED_out(0);
+                //usleep(INTERVAL_GREEN);
+				digitalWrite(GREEN_VCC, HIGH);
+            } else {
+				digitalWrite(GREEN_VCC, LOW);
+			}
 
             LED_out(1);
             usleep(INTERVAL_COMMON);
@@ -250,6 +262,7 @@ void LED_out(unsigned char no) {
     }
 
     // 시간의 10의 자리
+	/*
     if(no == 0) {
         if(digitNum == 1) {
             shiftOut(DS, SHCP, LSBFIRST, 0b00000010);
@@ -260,6 +273,7 @@ void LED_out(unsigned char no) {
         shiftOut(DS, SHCP, LSBFIRST, common[no]);
         Latch();
     }
+	*/
 
     // Colon
     if(no == 4) {
