@@ -1,6 +1,7 @@
 #alarm_hour.py
 import RPi.GPIO as GPIO
 import time
+import os
 
 
 jong_pwm_pin = 13
@@ -32,14 +33,14 @@ def jong_strike():
     GPIO.output(jong_dir_pin, False)
     jong_pwm_motor.ChangeDutyCycle(10) #go(delay)
     time.sleep(0.7) 
-    jong_pwm_motor.ChangeDutyCycle(34) #go
+    jong_pwm_motor.ChangeDutyCycle(39) #go
     time.sleep(0.15) 
     jong_pwm_motor.ChangeDutyCycle(0)  #stop
     time.sleep(1) 
 
     GPIO.output(jong_dir_pin, True)
-    jong_pwm_motor.ChangeDutyCycle(34) #go(delay)
-    time.sleep(0.13) 
+    jong_pwm_motor.ChangeDutyCycle(39) #go(delay)
+    time.sleep(0.14) 
 
     jong_pwm_motor.ChangeDutyCycle(0)  #stop
     time.sleep(1) 
@@ -68,13 +69,13 @@ def jing_strike():
     GPIO.output(jing_dir_pin, False)
     jing_pwm_motor.ChangeDutyCycle(10) #go(delay)
     time.sleep(0.7) 
-    jing_pwm_motor.ChangeDutyCycle(37) #go
+    jing_pwm_motor.ChangeDutyCycle(34) #go
     time.sleep(0.14) 
     jing_pwm_motor.ChangeDutyCycle(0)  #stop
     time.sleep(1) 
 
     GPIO.output(jing_dir_pin, True)
-    jing_pwm_motor.ChangeDutyCycle(37) #go
+    jing_pwm_motor.ChangeDutyCycle(34) #go
     time.sleep(0.12) 
 
     jing_pwm_motor.ChangeDutyCycle(0)  #stop
@@ -91,8 +92,13 @@ hour = int(current_time[0:2])
 while True:
     t = time.localtime()
     current_time = time.strftime(fmt, t)
-    if(current_time[0:2] >= "09" and current_time[0:2] <= "18" and (current_time[3:5] == "00" or current_time[3:5] == "30") and current_time[6:8] <= "50"): 
-    #if current_time[3:5] <= "50" :
+    if(current_time[0:2] >= "08" and current_time[0:2] <= "22" and (current_time[3:5] == "00" or current_time[3:5] == "30") and current_time[6:8] <= "50"): 
+    #if(current_time[0:2] >= "09" and current_time[0:2] <= "18" and (current_time[3:5] == "00" or current_time[3:5] == "30") and current_time[6:8] <= "50"): 
+    #if current_time[6:8] <= "50" :
+        if(current_time[6:8] == "00") :
+            os.system("sudo /home/pi/hub-ctrl -h 0 -P 2 -p 0")
+            time.sleep(1)
+            os.system("sudo /home/pi/hub-ctrl -h 0 -P 2 -p 1")
         print "Strike!"
     	jong_strike()
     	book_strike()
@@ -103,5 +109,4 @@ while True:
     
     
     
-    
-    
+ 
