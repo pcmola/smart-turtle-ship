@@ -4,7 +4,9 @@ Smart Turtle Ship
 
 #
 ## Description
-![Intr](https://postfiles.pstatic.net/MjAxODAyMTRfMTgx/MDAxNTE4NTc3MDY1OTEw.9f-HcDbd6PYKsOo3GstAoIwqFes907hw152dCPXvlMkg.guNlLROAKb1liuWs27DuCo2Ctvcd6hMaxVUKqTVSb-Mg.PNG.pcmola/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C5.PNG?type=w773)
+![Intro](https://postfiles.pstatic.net/MjAxODAyMTRfMTgx/MDAxNTE4NTc3MDY1OTEw.9f-HcDbd6PYKsOo3GstAoIwqFes907hw152dCPXvlMkg.guNlLROAKb1liuWs27DuCo2Ctvcd6hMaxVUKqTVSb-Mg.PNG.pcmola/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C5.PNG?type=w773)
+
+![Architecture Overview](https://postfiles.pstatic.net/MjAxODAyMTRfMTI4/MDAxNTE4NTc3MDY1ODA4.AXTt0wtz3D-Smtrl9eMQgqGQf2ViVZCVrAsKsPSVvg0g.TDMI58hT5rQIpm03GOpVbvc0UTOdJIYI0uncgNrirDMg.PNG.pcmola/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C6.PNG?type=w773)
 
 #
 ## Images
