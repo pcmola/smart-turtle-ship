@@ -1,5 +1,4 @@
 # Smart Turtle Ship
-#
 ## Description
 ![Intro](https://postfiles.pstatic.net/MjAxODAyMTRfMTgx/MDAxNTE4NTc3MDY1OTEw.9f-HcDbd6PYKsOo3GstAoIwqFes907hw152dCPXvlMkg.guNlLROAKb1liuWs27DuCo2Ctvcd6hMaxVUKqTVSb-Mg.PNG.pcmola/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C5.PNG?type=w773)
 
